@@ -38,7 +38,7 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder)
-                .usersByUsernameQuery("select username,password, enabled from users where username=?")
+                .usersByUsernameQuery("select username,password, enabled from users where username=?")  // table names according to created schema, in this case replaceable by admin_user table for user
                 .authoritiesByUsernameQuery("select username, authority from authorities where username=?");
     }
 
