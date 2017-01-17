@@ -36,9 +36,10 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .jdbcAuthentication()
-                .dataSource(dataSource);
-//                .passwordEncoder(passwordEncoder)
-//                .withUser("bill").password("abc@123").roles("ADMIN");
+                .dataSource(dataSource)
+                .passwordEncoder(passwordEncoder)
+                .usersByUsernameQuery("select username,password, enabled from users where username=?")
+                .authoritiesByUsernameQuery("select username, authority from authorities where username=?");
     }
 
     @Override
