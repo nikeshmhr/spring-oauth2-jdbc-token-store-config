@@ -1,6 +1,5 @@
 package com.f1soft.buddha.erp.finance.security;
 
-import java.security.SecureRandom;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -44,7 +43,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         clients
                 .jdbc(dataSource)
                 .passwordEncoder(passwordEncoder());
-
+        
     }
 
     @Override

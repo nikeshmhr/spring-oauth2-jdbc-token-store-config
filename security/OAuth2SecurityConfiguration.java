@@ -14,7 +14,6 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
 import org.springframework.security.oauth2.provider.approval.TokenStoreUserApprovalHandler;
-import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
@@ -38,7 +37,7 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder)
-                .usersByUsernameQuery("select username,password, enabled from users where username=?")  // table names according to created schema, in this case replaceable by admin_user table for user
+                .usersByUsernameQuery("select username, password, active from admin_user where username=?") // table names according to created schema, in this case replaceable by admin_user table for user
                 .authoritiesByUsernameQuery("select username, authority from authorities where username=?");
     }
 
@@ -81,10 +80,10 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return store;
     }
 
+    /*
     public JdbcClientDetailsService jdbcClientDetailsService() {
         JdbcClientDetailsService s = new JdbcClientDetailsService(dataSource);
         s.setPasswordEncoder(passwordEncoder);
         return s;
-    }
-
+    }*/
 }
